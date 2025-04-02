@@ -1,0 +1,78 @@
+[debug] [2025-04-02T22:13:18.949Z] ----------------------------------------------------------------------
+[debug] [2025-04-02T22:13:18.952Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-04-02T22:13:18.952Z] CLI Version:   13.35.1
+[debug] [2025-04-02T22:13:18.952Z] Platform:      win32
+[debug] [2025-04-02T22:13:18.952Z] Node Version:  v22.14.0
+[debug] [2025-04-02T22:13:18.953Z] Time:          Thu Apr 03 2025 00:13:18 GMT+0200 (Central European Summer Time)
+[debug] [2025-04-02T22:13:18.953Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-02T22:13:19.133Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-02T22:13:19.133Z] > authorizing via signed-in user (labaj.jakub@gmail.com)
+[debug] [2025-04-02T22:13:19.133Z] [iam] checking project portfolioshell for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-04-02T22:13:19.134Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:19.134Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:19.135Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioshell:testIamPermissions [none]
+[debug] [2025-04-02T22:13:19.135Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioshell:testIamPermissions x-goog-quota-user=projects/portfolioshell
+[debug] [2025-04-02T22:13:19.135Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioshell:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-02T22:13:19.932Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioshell:testIamPermissions 200
+[debug] [2025-04-02T22:13:19.932Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioshell:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-02T22:13:19.933Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:19.933Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:19.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolioshell [none]
+[debug] [2025-04-02T22:13:20.189Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolioshell 200
+[debug] [2025-04-02T22:13:20.189Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolioshell {"projectId":"portfolioshell","projectNumber":"64314577366","displayName":"portfolioshell","name":"projects/portfolioshell","resources":{"hostingSite":"portfolioshell"},"state":"ACTIVE","etag":"1_af488ec0-118c-48a0-a701-385728e7df45"}
+[info] 
+[info] === Deploying to 'portfolioshell'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-04-02T22:13:20.198Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:20.198Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:20.199Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfolioshell/versions [none]
+[debug] [2025-04-02T22:13:20.199Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfolioshell/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-04-02T22:13:21.506Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfolioshell/versions 200
+[debug] [2025-04-02T22:13:21.506Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfolioshell/versions {"name":"projects/64314577366/sites/portfolioshell/versions/fa29768eac31bfb3","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[portfolioshell]: beginning deploy... 
+[info] i  hosting[portfolioshell]: found 10 files in dist/apps/portfolioshell/client 
+[debug] [2025-04-02T22:13:21.524Z] [hosting] uploading with 200 concurrency
+[debug] [2025-04-02T22:13:21.583Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.583Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.584Z] [hosting] hash cache [ZGlzdFxhcHBzXHBvcnRmb2xpb3NoZWxsXGNsaWVudA] stored for 10 files
+[debug] [2025-04-02T22:13:21.584Z] [hosting][hash queue][FINAL] {"max":53,"min":3,"avg":29.4,"active":0,"complete":10,"success":10,"errored":0,"retried":0,"total":10,"elapsed":58}
+[debug] [2025-04-02T22:13:21.584Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/64314577366/sites/portfolioshell/versions/fa29768eac31bfb3:populateFiles [none]
+[debug] [2025-04-02T22:13:21.584Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/64314577366/sites/portfolioshell/versions/fa29768eac31bfb3:populateFiles {"files":{"/package.json":"4e9861e62bfc842f5410878964b71a752d585e73a02f09eae1d9231a7e0f49e7","/favicon.ico":"7eaf24d39e7b154fee97d6601a58fc1758084f4c4a835c20d00f59ac1f20c88d","/assets/virtualExposes-BIHI7g3E.js":"53106e9b8f5b5178eb06918d05f7cef1a97784f18ba2137455b10760d62fdca6","/remoteEntry.js":"6b0cfbb7645cb597f40bce95852268502d25ca07406febcac04481447620825c","/index.html":"77941a4d334d0c226ebc762189da23f69af9077f9666196fde46eaf2facd7c8d","/assets/hostInit-CZbrjhIf.js":"8ab5e704581d567d2dab07f520f58ff8fbc057267e8ec36d53e2498f4210d709","/assets/index--mJD5y09.js":"35ba6c8534d8427ab939da27df5d924383c542a602c580c5e438dc8e5013a044","/assets/portfolioshell__mf_v__runtimeInit__mf_v__-B7GzqxWn.js":"8dab5fb31f13e2a00c0f7367678b88bfa7a08f22e30d1fd21aca880bcf3a2d72","/assets/bootstrap-Dc-CjHYs.js":"bdfc8579d6f5767b858524779a1f544291a995c05fd6ac8b53c7de086003a04e","/assets/preload-helper-CLcXU_4U.js":"e35a19e12514b838aa4c7dae233750e51544ef007bd4140f8432dbb3d1805cba"}}
+[debug] [2025-04-02T22:13:21.836Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/64314577366/sites/portfolioshell/versions/fa29768eac31bfb3:populateFiles 200
+[debug] [2025-04-02T22:13:21.836Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/64314577366/sites/portfolioshell/versions/fa29768eac31bfb3:populateFiles {"uploadRequiredHashes":["6b0cfbb7645cb597f40bce95852268502d25ca07406febcac04481447620825c","53106e9b8f5b5178eb06918d05f7cef1a97784f18ba2137455b10760d62fdca6","8dab5fb31f13e2a00c0f7367678b88bfa7a08f22e30d1fd21aca880bcf3a2d72","bdfc8579d6f5767b858524779a1f544291a995c05fd6ac8b53c7de086003a04e","8ab5e704581d567d2dab07f520f58ff8fbc057267e8ec36d53e2498f4210d709","e35a19e12514b838aa4c7dae233750e51544ef007bd4140f8432dbb3d1805cba","77941a4d334d0c226ebc762189da23f69af9077f9666196fde46eaf2facd7c8d","35ba6c8534d8427ab939da27df5d924383c542a602c580c5e438dc8e5013a044"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files"}
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.837Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] Checked if tokens are valid: true, expires at: 1743633850240
+[debug] [2025-04-02T22:13:21.838Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/6b0cfbb7645cb597f40bce95852268502d25ca07406febcac04481447620825c [none]
+[debug] [2025-04-02T22:13:21.838Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/6b0cfbb7645cb597f40bce95852268502d25ca07406febcac04481447620825c [stream]
+[debug] [2025-04-02T22:13:21.840Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/53106e9b8f5b5178eb06918d05f7cef1a97784f18ba2137455b10760d62fdca6 [none]
+[debug] [2025-04-02T22:13:21.840Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/53106e9b8f5b5178eb06918d05f7cef1a97784f18ba2137455b10760d62fdca6 [stream]
+[debug] [2025-04-02T22:13:21.840Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/8dab5fb31f13e2a00c0f7367678b88bfa7a08f22e30d1fd21aca880bcf3a2d72 [none]
+[debug] [2025-04-02T22:13:21.841Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/8dab5fb31f13e2a00c0f7367678b88bfa7a08f22e30d1fd21aca880bcf3a2d72 [stream]
+[debug] [2025-04-02T22:13:21.841Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/bdfc8579d6f5767b858524779a1f544291a995c05fd6ac8b53c7de086003a04e [none]
+[debug] [2025-04-02T22:13:21.841Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/bdfc8579d6f5767b858524779a1f544291a995c05fd6ac8b53c7de086003a04e [stream]
+[debug] [2025-04-02T22:13:21.842Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/8ab5e704581d567d2dab07f520f58ff8fbc057267e8ec36d53e2498f4210d709 [none]
+[debug] [2025-04-02T22:13:21.842Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/8ab5e704581d567d2dab07f520f58ff8fbc057267e8ec36d53e2498f4210d709 [stream]
+[debug] [2025-04-02T22:13:21.843Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/e35a19e12514b838aa4c7dae233750e51544ef007bd4140f8432dbb3d1805cba [none]
+[debug] [2025-04-02T22:13:21.843Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/e35a19e12514b838aa4c7dae233750e51544ef007bd4140f8432dbb3d1805cba [stream]
+[debug] [2025-04-02T22:13:21.844Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/77941a4d334d0c226ebc762189da23f69af9077f9666196fde46eaf2facd7c8d [none]
+[debug] [2025-04-02T22:13:21.845Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/77941a4d334d0c226ebc762189da23f69af9077f9666196fde46eaf2facd7c8d [stream]
+[debug] [2025-04-02T22:13:21.845Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/35ba6c8534d8427ab939da27df5d924383c542a602c580c5e438dc8e5013a044 [none]
+[debug] [2025-04-02T22:13:21.845Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfolioshell/versions/fa29768eac31bfb3/files/35ba6c8534d8427ab939da27df5d924383c542a602c580c5e438dc8e5013a044 [stream]
+[debug] [2025-04-02T22:13:21.846Z] [hosting][populate queue][FINAL] {"max":255,"min":255,"avg":255,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":263}
+[debug] [2025-04-02T22:13:21.846Z] [hosting] uploads queued: 8

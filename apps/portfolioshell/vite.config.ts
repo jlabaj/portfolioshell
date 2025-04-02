@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import path from 'path';
+import { federation } from '@module-federation/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,23 +14,73 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: '../../dist/apps/portfolioshell/client',
       reportCompressedSize: true,
-      target: ['es2020'],
+      modulePreload: false,
+    target: "esnext",
+    minify: false,
+    cssCodeSplit: false,
       rollupOptions: {
-        external: ['react-mfe', 'react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
+        external: [
+          'react',
+          'react-dom',
+          '@mui/material',
+          '@emotion/react',
+          '@emotion/styled',
+          'tslib',
+          'rxjs',
+          'rxjs/operators',
+          'rxjs/internal/Subscription',
+          '@angular/core',
+          '@angular/common',
+          '@angular/platform-browser',
+          '@angular/platform-browser-dynamic',
+          '@angular/compiler',
+          '@angular/forms',
+          '@angular/router'
+        ],
         output: {
+          format: 'es',
+          entryFileNames: '[name].js',
+          chunkFileNames: '[name].js',
+          assetFileNames: '[name].[ext]',
           globals: {
-            'react-mfe': 'ReactMFE',
             'react': 'React',
             'react-dom': 'ReactDOM',
             '@mui/material': 'MaterialUI',
             '@emotion/react': 'EmotionReact',
-            '@emotion/styled': 'EmotionStyled'
+            '@emotion/styled': 'EmotionStyled',
+            'tslib': 'tslib',
+            'rxjs': 'rxjs',
+            'rxjs/operators': 'rxjs/operators',
+            'rxjs/internal/Subscription': 'rxjs/internal/Subscription',
+            '@angular/core': 'ng.core',
+            '@angular/common': 'ng.common',
+            '@angular/platform-browser': 'ng.platformBrowser',
+            '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+            '@angular/compiler': 'ng.compiler',
+            '@angular/forms': 'ng.forms',
+            '@angular/router': 'ng.router'
           }
         }
-      },
+      }
     },
     optimizeDeps: {
-      exclude: ['react-mfe']
+      include: [
+        'tslib',
+        'rxjs',
+        'rxjs/operators',
+        'rxjs/internal/Subscription',
+        '@angular/core',
+        '@angular/common',
+        '@angular/platform-browser',
+        '@angular/platform-browser-dynamic',
+        '@angular/compiler',
+        '@angular/forms',
+        '@angular/router',
+        '@emotion/react',
+        '@emotion/styled',
+        'react',
+        'react-dom'
+      ]
     },
     plugins: [
       analog({
@@ -40,33 +91,43 @@ export default defineConfig(({ mode }) => {
         },
       }),
       nxViteTsPaths(),
-      {
-        name: 'external-module-resolver',
-        resolveId(id) {
-          if (id === 'react-mfe') {
-            return 'https://websaving-cs.web.app/react-mfe.js';
-          }
-          if (id === 'react') {
-            return path.resolve(__dirname, '../../node_modules/react/index.js');
-          }
-          if (id === 'react-dom') {
-            return path.resolve(__dirname, '../../node_modules/react-dom/index.js');
-          }
-          if (id === '@mui/material') {
-            return path.resolve(__dirname, '../../node_modules/@mui/material/esm/index.js');
-          }
-          if (id === '@mui/icons-material') {
-            return path.resolve(__dirname, '../../node_modules/@mui/icons-material/esm/index.js');
-          }          
-          if (id === '@emotion/react') {
-            return path.resolve(__dirname, '../../node_modules/@emotion/react/dist/emotion-react.esm.js');
-          }
-          if (id === '@emotion/styled') {
-            return path.resolve(__dirname, '../../node_modules/@emotion/styled/dist/emotion-styled.esm.js');
-          }
+      federation({
+        name: 'portfolioshell',
+        filename: 'remoteEntry.js',
+        remotes: {
+        remote: {
+          type: "module",
+          name: "remote",
+          entry: 'https://websaving-cs.web.app/remoteEntry.js',
+          entryGlobalName: "remote",
+          shareScope: "default",
+        },
+      },
+        shared: {
+          react: { singleton: true, requiredVersion: '^19.1.0' },
+          'react-dom': { singleton: true, requiredVersion: '^19.1.0' },
+          '@mui/material': { singleton: true, requiredVersion: '^7.0.1' },
+          '@emotion/react': { singleton: true, requiredVersion: '^11.14.0' },
+          '@emotion/styled': { singleton: true, requiredVersion: '^11.14.0' },
+          tslib: { singleton: true },
+          rxjs: { singleton: true },
+          '@angular/core': { singleton: true },
+          '@angular/common': { singleton: true },
+          '@angular/platform-browser': { singleton: true },
+          '@angular/platform-browser-dynamic': { singleton: true },
+          '@angular/compiler': { singleton: true },
+          '@angular/forms': { singleton: true },
+          '@angular/router': { singleton: true }
         }
-      }
+      })
     ],
+    resolve: {
+      alias: {
+        '@app': path.resolve(__dirname, './src/app'),
+        '@emotion/react': path.resolve(__dirname, '../../node_modules/@emotion/react'),
+        '@emotion/styled': path.resolve(__dirname, '../../node_modules/@emotion/styled')
+      }
+    },
     server: {
       fs: {
         allow: ['..'],  // Allow serving files from one level up (where node_modules is)

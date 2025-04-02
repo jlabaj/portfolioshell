@@ -1,4 +1,9 @@
-declare module 'react-mfe' {
-    export function mount(containerId: string): void;
-    export function unmount(containerId: string): void;
+declare module 'reactMFE' {
+  interface ReactMFE {
+    mount: (containerId: string) => void;
+    unmount: (containerId: string) => void;
   }
+
+  const ReactMFE: ReactMFE;
+  export default ReactMFE;
+}
