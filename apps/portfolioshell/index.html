@@ -9,6 +9,24 @@
   </head>
   <body>
     <app-root></app-root>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.2.3",
+          "react-dom": "https://esm.sh/react-dom@19.2.3"
+          "@angular/core": "https://esm.sh/@angular/core@21.6.10",
+          "@angular/common": "https://esm.sh/@angular/common@21.6.10",
+          "@angular/platform-browser": "https://esm.sh/@angular/platform-browser@21.6.10",
+          "@angular/router": "https://esm.sh/@angular/router@21.6.10",
+          "rxjs": "https://esm.sh/rxjs@7.8.0"
+        }
+      }
+      </script>
+      <div id="react-container"></div>
+
+      <script type="module">
+        const mf = await import('http://localhost:4173/react-mf.js');
+        mf.mount(document.getElementById('react-container'));
+      </script>
   </body>
 </html>
