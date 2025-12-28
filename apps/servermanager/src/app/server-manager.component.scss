@@ -1,0 +1,70 @@
+/* server-manager.component.css */
+:host {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+mat-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content {
+	flex: 1;
+	padding: 16px;
+	overflow: auto;
+	height: auto;
+}
+
+.footer {
+	text-align: center;
+	min-height: 5vh;
+	display: flex;
+	justify-content: center;
+	// padding: 20px;
+}
+
+.footer-link,
+.footer-item {
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+	transition: color 0.3s ease, border-bottom 0.3s ease;
+	border-bottom: 2px solid transparent;
+	padding-bottom: 2px;
+	color: white;
+	margin: 0;
+}
+
+.footer-item {
+	padding-right: 0 !important;
+}
+
+.footer-link {
+	padding-left: 5px !important;
+}
+
+.footer-link:hover {
+	color: rgb(85, 26, 139);
+	border-bottom: 2px solid #0056b3;
+	cursor: pointer !important;
+}
+
+/* Optional: Add responsive font scaling */
+@media (max-width: 768px) {
+	.footer-link {
+		font-size: 14px;
+	}
+}
+
+.flex-container {
+	display: flex;
+	align-items: center;
+}
+
+.element {
+	padding: 16px;
+	font-size: 16px;
+}

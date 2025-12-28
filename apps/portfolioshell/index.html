@@ -22,11 +22,19 @@
         }
       }
       </script>
+      
+      <!-- React MF container -->
       <div id="react-container"></div>
-
       <script type="module">
-        const mf = await import('http://localhost:4173/react-mf.js');
-        mf.mount(document.getElementById('react-container'));
+        const reactMF = await import('http://localhost:4173/react-mf.js');
+        reactMF.mount(document.getElementById('react-container'));
+      </script>
+
+      <!-- Angular MF container -->
+      <div id="angular-mf-container"></div>
+      <script type="module">
+        const angularMF = await import('http://localhost:4174/angular-mf.js');
+        angularMF.mount(document.getElementById('angular-mf-container'));
       </script>
   </body>
 </html>

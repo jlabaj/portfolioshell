@@ -1,0 +1,63 @@
+.demo-table {
+	width: 100%;
+}
+
+.mat-column-demo-position {
+	width: 32px;
+	border-right: 1px solid currentColor;
+	padding-right: 24px;
+	text-align: center;
+}
+
+.mat-column-demo-name {
+	padding-left: 16px;
+	font-size: 20px;
+}
+
+.mat-column-demo-weight {
+	font-style: italic;
+}
+
+.mat-column-demo-symbol {
+	width: 32px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.toggle-section {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+}
+
+.toggle-margin {
+	margin: 10px;
+}
+
+.flex-container {
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	float: left;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.checkboxActive {
+	flex: 1;
+	white-space: nowrap;
+}
+
+.divider {
+	height: 50px;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.validationLabel {
+	flex: 2;
+	font-size: 14px;
+	margin: 0;
+}

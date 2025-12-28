@@ -1,0 +1,37 @@
+<mat-sidenav-container class="example-sidenav-container"
+	[style.marginTop.px]="56">
+	<mat-sidenav #snav [mode]="'side'"
+		[fixedInViewport]="true" fixedTopGap="70" fixedBottomGap="70">
+		<button type="button" mat-button (click)="snav.toggle()">
+			Aktive Server schließen
+		</button>
+		<sm-dashboard [inputDataSource$$]="query$$()" [isActiveServerDashboard]="true"></sm-dashboard>
+	</mat-sidenav>
+
+	<mat-sidenav-content class="sidenav">
+		<div class="flex-container">
+			@if(!snav.opened) {
+			<button type="button" mat-button (click)="snav.toggle()">
+				Zum aktiven Server
+			</button>
+			}
+
+			<mat-divider [vertical]="true" class="element divider"></mat-divider>
+			<mat-form-field class="element">
+				<mat-label>Nach Label suchen</mat-label>
+				<input matInput type="text" [(ngModel)]="search" (ngModelChange)="onSearchChange()">
+				@if (search) {
+				<button matSuffix mat-icon-button type="button" aria-label="Clear" (click)="clearSearch()">
+					<mat-icon>close</mat-icon>
+				</button>
+				}
+			</mat-form-field>
+		</div>
+
+		<div class="container responsive-grid">
+			@for (server of servers$$(); track $index; let iField = $index;) {
+			<sm-card [server]="server" [id]="iField" [isMobile$$]="isMobile$$()?.matches"></sm-card>
+			}
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

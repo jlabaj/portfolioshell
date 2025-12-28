@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "store": ["libs/store/src/index.ts"],
+      "tools": ["libs/tools/src/index.ts"]
+    },
     "jsx": "react"
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,51 @@
+.container {
+	padding: 24px;
+}
+
+.responsive-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 24px;
+	grid-auto-rows: auto;
+}
+
+.example-container {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+h1.example-app-name {
+	margin-left: 8px;
+}
+
+.example-sidenav-container {
+	flex: 1;
+}
+
+.flex-container {
+	display: flex;
+	align-items: center;
+}
+
+.element {
+	padding: 16px;
+	font-size: 16px;
+}
+
+:host::ng-deep .mat-mdc-form-field-subscript-wrapper {
+	height: 0 !important;
+}
+
+.sidenav {
+	background-color: white;
+}
+
+.divider {
+	padding-left: 8px;
+	height: 20px;
+}

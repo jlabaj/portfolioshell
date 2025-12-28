@@ -1,0 +1,45 @@
+<mat-card class="grid-item">
+	<mat-card-header class="cardHeader">
+		<div class="flex-container">
+
+			<div class="flex-item" id="titlecontainer">
+				<div>
+					@if(!isEditing$$()) {
+					<mat-card-title [id]="'cardtitle'+id" class="sm-form-field" title="click zum editieren">{{ server.label }} </mat-card-title>
+					} @else {
+					<form [formGroup]="formGroup" [id]="'titleform'+id" class="example-form" name="form">
+						<mat-form-field>
+							<input matInput type="text" [id]="'titleinput'+id" name="label" formControlName="label" placeholder="Server einz">
+							@if(labelFormControl.invalid && (labelFormControl.dirty || labelFormControl.touched)) {
+							<div>
+								@if (formGroup.get('label')?.hasError('maxlength')) {
+								<mat-error>Maximal 10 Zeichen erlaubt</mat-error>
+								}
+								@if (formGroup.get('label')?.hasError('required')) {
+								<mat-error>Servername ist <strong>erforderlich</strong></mat-error>
+								}
+							</div>
+							}
+
+						</mat-form-field>
+					</form>
+					}
+				</div>
+			</div>
+		</div>
+	</mat-card-header>
+	<mat-card-content class="flex-container-state">
+		@if(!isMobile$$()) {
+		<mat-icon class="flex-item">
+			dns
+		</mat-icon>
+		<div class="flex-item center-flex-item">
+			{{ server.active ? 'activ' : 'nicht activ' }}
+		</div>
+		}
+		<sm-circle-svg class="flex-item fixed-size" [color]="server.active ? 'green': 'red'"></sm-circle-svg>
+	</mat-card-content>
+	<mat-card-actions>
+		<button mat-button (click)="onActivateToggleClick()">{{isActiveLabel$$()}}</button>
+	</mat-card-actions>
+</mat-card>
