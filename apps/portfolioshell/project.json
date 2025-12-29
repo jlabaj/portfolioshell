@@ -2,92 +2,126 @@
   "name": "portfolioshell",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
   "sourceRoot": "apps/portfolioshell/src",
+  "prefix": "app",
   "tags": [],
   "targets": {
     "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "portfolioshell:esbuild:production"
+        },
+        "development": {
+          "target": "portfolioshell:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "portfolioshell:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular/build:extract-i18n"
+    },
+    "esbuild": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portfolioshell",
         "index": "apps/portfolioshell/index.html",
         "browser": "apps/portfolioshell/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
         "tsConfig": "apps/portfolioshell/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
             "input": "apps/portfolioshell/public"
           }
         ],
-        "styles": ["apps/portfolioshell/src/styles.scss"]
+        "styles": [
+          "apps/portfolioshell/src/styles.scss",
+          "@angular/material/prebuilt-themes/indigo-pink.css"
+        ],
+        "scripts": []
       },
-      "defaultConfiguration": "production",
       "configurations": {
         "production": {
+          "optimization": true,
+          "outputHashing": "all",
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
             }
-          ],
-          "outputHashing": "all"
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+    "serve-original": {
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "portfolioshell:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "portfolioshell:esbuild:development"
+        }
+      },
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "portfolioshell:build",
         "port": 4200
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "portfolioshell:build:development"
-        },
-        "production": {
-          "buildTarget": "portfolioshell:build:production"
-        }
-      }
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "portfolioshell:build"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/eslint:lint",
       "options": {
-        "jestConfig": "apps/portfolioshell/jest.config.ts",
-        "tsConfig": "apps/portfolioshell/tsconfig.spec.json"
+        "lintFilePatterns": [
+          "apps/portfolioshell/**/*.ts",
+          "apps/portfolioshell/**/*.html"
+        ]
       }
     },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
+    "test": {
+      "executor": "@angular/build:karma",
       "options": {
-        "buildTarget": "portfolioshell:build",
-        "port": 4200,
-        "staticFilePath": "dist/apps/portfolioshell/browser",
-        "spa": true
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "apps/portfolioshell/tsconfig.spec.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/portfolioshell/public"
+          }
+        ],
+        "styles": [
+          "apps/portfolioshell/src/styles.scss"
+        ],
+        "scripts": []
       }
     }
   }

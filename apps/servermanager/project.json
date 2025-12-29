@@ -9,65 +9,32 @@
     "generate-config": {
       "executor": "@nx/js:node",
       "options": {
-        "main": "scripts/generate-firebase-config.js"
+        "main": "scripts/generate-firebase-config.cjs"
       }
     },
     "build": {
-      "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/servermanager",
-        "browser": "apps/servermanager/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/servermanager/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/servermanager/public"
-          }
-        ],
-        "styles": [
-          "@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/servermanager/src/styles.scss"
-        ]
-      },
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "1mb",
-              "maximumError": "2mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
-            }
-          ],
-          "outputHashing": "all"
+          "target": "servermanager:esbuild:production"
         },
         "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
+          "target": "servermanager:esbuild:development",
+          "dev": true
         }
       },
       "defaultConfiguration": "production"
     },
     "serve": {
-      "continuous": true,
-      "executor": "@angular/build:dev-server",
-      "configurations": {
-        "production": {
-          "buildTarget": "servermanager:build:production"
-        },
-        "development": {
-          "buildTarget": "servermanager:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "servermanager:serve-original:development",
+        "rebuildDelay": 500,
+        "dev": true,
+        "cacheExternalArtifacts": false,
+        "port": 0
+      }
     },
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
@@ -80,7 +47,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/servermanager/jest.config.ts",
         "tsConfig": "apps/servermanager/tsconfig.spec.json"
@@ -94,6 +63,69 @@
         "port": 4200,
         "staticFilePath": "dist/apps/servermanager/browser",
         "spa": true
+      }
+    },
+    "esbuild": {
+      "executor": "@angular/build:application",
+      "options": {
+        "outputPath": "dist/apps/servermanager",
+        "index": "apps/servermanager/src/index.html",
+        "browser": "apps/servermanager/src/main.ts",
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
+        "tsConfig": "apps/servermanager/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/servermanager/public"
+          }
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/servermanager/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-original": {
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "servermanager:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "servermanager:esbuild:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201
       }
     }
   }

@@ -14,9 +14,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { Server, ServerDataService } from 'store';
-import { from, Subscription } from 'rxjs';
+import { from, Observable, Subscription } from 'rxjs';
 import { CardComponent } from '../card/card.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+
+function signalFromObservable<T>(obs$: Observable<T>, initial?: T) {
+  const sig = signal(initial as T);
+  obs$.subscribe(val => sig.set(val));
+  return sig;
+}
 
 @Component({
 	selector: 'sm-overview',
@@ -29,16 +35,16 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 export class OverviewComponent {
 	public serverDataService = inject(ServerDataService);
 	public servers$$: Signal<Server[]> = this.serverDataService.servers$$;
-	public isMobile$$: Signal<BreakpointState | undefined> = signal<BreakpointState | undefined>(undefined);
-	public query$$ = this.serverDataService.query$$;
 	private breakpointObserver = inject(BreakpointObserver);
+	public isMobile$$ = signalFromObservable(
+    this.breakpointObserver.observe(Breakpoints.Handset)
+  );
+	public query$$ = this.serverDataService.query$$;
 	public search = '';
 	private overviewQuery$$ = signal<Server[]>([]);
 	private subs = new Subscription();
 
 	public constructor() {
-		const breakpointObserver$ = this.breakpointObserver.observe(Breakpoints.Handset);
-		this.isMobile$$ = toSignal(breakpointObserver$);
 		effect(() => {
 			if (this.overviewQuery$$().length > 0) {
 				this.servers$$ = this.overviewQuery$$;

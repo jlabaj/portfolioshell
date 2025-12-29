@@ -10,12 +10,12 @@ import { NavigationTopComponent } from './components/navigation-top/navigation-t
 	selector: 'sm-root',
 	standalone: true,
 	templateUrl: './server-manager.component.html',
-	styleUrls: ['./server-manager.component.scss'],
+	styleUrls: ['./../styles.scss', './server-manager.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [CommonModule, NavigationTopComponent, MatToolbarModule, RouterModule],
 })
-export class ServiceManagerComponent {
+export class ServerManagerComponent {
 
-	public serverDataService = inject(ServerDataService);
-	public dataSource$$ = this.serverDataService.list();
+	// public serverDataService = inject(ServerDataService);
+	// public dataSource$$ = this.serverDataService.list();
 }

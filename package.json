@@ -1,6 +1,5 @@
 {
   "name": "portfolioshell",
-  "type": "module",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -43,6 +42,9 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@nx/vite": "^21.6.10",
+    "@softarc/native-federation-node": "^3.3.4",
+    "es-module-shims": "^1.5.12",
+    "firebase": "^12.7.0",
     "i": "^0.3.7",
     "marked": "^5.0.2",
     "marked-gfm-heading-id": "^3.0.4",
